@@ -1,0 +1,72 @@
+<% nested_namespace do -%>
+class <%= controller_class_name %>Controller < ApplicationController
+<% if singular_actions? -%>
+  before_action :set_<%= singular_file_name %>, only: %i[<%= singular_actions.sort.join(' ') %>]
+<% end -%>
+<% if index? -%>
+
+  def index
+    @<%= file_name %> = <%= namespaced_model_class %>.all
+  end
+<% end -%>
+<% if show? -%>
+
+  def show; end
+<% end -%>
+<% if new? -%>
+
+  def new
+    run <%= namespaced_model_class %>::Present
+  end
+<% end -%>
+<% if create? -%>
+
+  def create
+    run <%= namespaced_model_class %>::Create do |result|
+      return redirect_to(
+        <%= after_create_path %>,
+        notice: t('<%= notice_namespace %>.create.success')
+      )
+    end
+
+    render :new
+  end
+<% end -%>
+<% if edit? -%>
+
+  def edit
+    run <%= namespaced_model_class %>::Present
+  end
+<% end -%>
+<% if update? -%>
+
+  def update
+    run <%= namespaced_model_class %>::Update do |result|
+      return redirect_to(
+        <%= after_update_path %>,
+        notice: t('<%= notice_namespace %>.update.success')
+      )
+    end
+
+    render :edit
+  end
+<% end -%>
+<% if destroy? -%>
+
+  def destroy
+    @<%= singular_file_name %>.destroy
+    redirect_to(
+      <%= after_destroy_path %>,
+      notice: t('<%= notice_namespace %>.destroy.success')
+    )
+  end
+<% end -%>
+<% if singular_actions? -%>
+
+  private
+
+  def set_<%= singular_file_name %>
+    @<%= singular_file_name %> = <%= namespaced_model_class %>.find(params[:id])
+  end
+<% end -%>
+end<% end -%>

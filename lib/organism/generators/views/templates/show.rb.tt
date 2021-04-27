@@ -1,0 +1,4 @@
+<%%= cell(
+  <%= namespaced_model_class %>::Show,
+  @<%= singular_table_name %>,
+).() %>

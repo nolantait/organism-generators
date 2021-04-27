@@ -1,0 +1,4 @@
+<%%= cell(
+  <%= namespaced_model_class %>::<%= collection_renderer_class %>,
+  @<%= table_name %>,
+).() %>

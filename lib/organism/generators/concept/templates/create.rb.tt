@@ -1,0 +1,6 @@
+<% nested_namespace do -%>
+class Create < <%= base_operation_class %>
+  step Subprocess(<%= namespaced_model_class %>::Present)
+  step Contract::Validate(key: :<%= singular_file_name %>)
+  step Contract::Persist()
+end<% end -%>

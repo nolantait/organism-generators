@@ -1,0 +1,17 @@
+require 'rails_helper'
+
+describe <%= namespaced_model_class %>::Update do
+  let(:result) { described_class.trace(params: params) }
+  let(:model) { <%= model_class %>::Factory.call }
+  let(:params) do
+    {
+      id: model.id,
+      <%= singular_table_name %>: attributes_for(:<%= singular_table_name %>)
+    }
+  end
+
+  it 'persists when valid' do
+    expect(result.success?).to eq true
+    expect(result[:model].updated_at).to be > result[:model].created_at
+  end
+end

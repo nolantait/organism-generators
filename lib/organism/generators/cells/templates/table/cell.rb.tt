@@ -1,0 +1,32 @@
+<% nested_namespace do -%>
+class Table < <%= base_cell_class %>
+  def show
+    cell(
+      Ui::Table,
+      <%= table_name %>,
+      **table_options
+    ).()
+  end
+
+  private
+
+  def table_options
+    {
+      actions: actions_list,
+      header: header,
+      style: style
+    }
+  end
+
+  def header
+    content_tag(:h5, '<%= human_name.pluralize %>')
+  end
+
+  def component_style
+    '<%= table_component_style %>'
+  end
+
+  def <%= table_name %>
+    model
+  end
+end<% end -%>

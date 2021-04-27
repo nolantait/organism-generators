@@ -1,0 +1,15 @@
+require 'rails_helper'
+
+describe <%= namespaced_model_class %>::Create do
+  let(:result) { described_class.trace(params: params) }
+  let(:params) do
+    {
+      <%= singular_table_name %>: attributes_for(:<%= singular_table_name %>)
+    }
+  end
+
+  it 'persists when valid' do
+    expect(result.success?).to eq true
+    expect(result[:model].persisted?).to eq true
+  end
+end

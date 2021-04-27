@@ -1,0 +1,7 @@
+<%%= simple_form_for model, as: :<%= singular_table_name %>, url: submit_url do |f| %>
+  <fieldset>
+    <%%= legend %>
+  </fieldset>
+
+  <%%= controls(f) %>
+<%% end %>

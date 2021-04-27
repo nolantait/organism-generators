@@ -1,0 +1,3 @@
+<% nested_namespace do -%>
+class Update < Create
+end<% end -%>

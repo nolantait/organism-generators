@@ -1,0 +1,11 @@
+<% nested_namespace do -%>
+module Contracts
+  class Create < <%= base_contract_class %>
+
+    validation do
+      params do
+      end
+    end
+  end
+end
+<% end -%>

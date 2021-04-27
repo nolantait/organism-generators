@@ -1,0 +1,8 @@
+<% nested_namespace do -%>
+class Form < <%= base_cell_class %>
+  include <%= form_helper_class %>
+
+  def show
+    render
+  end
+end<% end -%>

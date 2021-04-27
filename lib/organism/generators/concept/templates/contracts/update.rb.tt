@@ -1,0 +1,6 @@
+<% nested_namespace do -%>
+module Contracts
+  class Update < Create
+  end
+end
+<% end -%>

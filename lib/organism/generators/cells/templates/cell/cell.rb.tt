@@ -1,0 +1,18 @@
+<% nested_namespace do -%>
+class Cell < <%= base_cell_class %>
+  def show
+    render
+  end
+<% if list? -%>
+
+  def list
+    render
+  end
+<% end -%>
+
+  private
+
+  def component_style
+    '<%= cell_component_style %>'
+  end
+end<% end -%>

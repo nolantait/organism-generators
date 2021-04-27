@@ -1,0 +1,8 @@
+<%%= cell(
+  <%= namespaced_model_class %>::Form,
+  @form,
+  path: {
+    submit: <%= plural_route_name %>_path,
+    back: <%= plural_route_name %>_path
+  }
+).() %>

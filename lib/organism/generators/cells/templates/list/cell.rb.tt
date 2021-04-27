@@ -1,0 +1,32 @@
+<% nested_namespace do -%>
+class List < <%= base_cell_class %>
+  def show
+    cell(
+      Ui::List,
+      <%= table_name %>,
+      **list_options
+    ).()
+  end
+
+  private
+
+  def list_options
+    {
+      actions: actions_list,
+      header: header,
+      style: style
+    }
+  end
+
+  def header
+    content_tag(:h5, '<%= human_name.pluralize %>')
+  end
+
+  def component_style
+    '<%= list_component_style %>'
+  end
+
+  def <%= table_name %>
+    model
+  end
+end<% end -%>

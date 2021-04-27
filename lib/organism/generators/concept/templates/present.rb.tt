@@ -1,0 +1,12 @@
+<% nested_namespace do -%>
+class Present < <%= base_operation_class %>
+  step Model(<%= namespaced_model_class %>, :find_by)
+  step Contract::Build(constant: <%= contract_class('update')%>),
+    Output(:success) => End(:success)
+
+  fail Model(<%= namespaced_model_class %>, :new),
+    id: :build_new,
+    Output(:success) => Track(:success)
+  step Contract::Build(constant: <%= contract_class('create') %>),
+    id: :build_new_contract
+end<% end -%>

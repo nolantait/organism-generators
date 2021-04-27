@@ -10,7 +10,7 @@ module Organism
     def create_controller_files
       template(
         'controller.rb',
-        File.join('app/controllers', class_path, "#{file_name}_controller.rb")
+        File.join('app/controllers', class_path, "#{plural_file_name}_controller.rb")
       )
     end
 
@@ -18,7 +18,7 @@ module Organism
       return if actions.empty?
 
       route(
-        "resources :#{file_name}, only: %i[#{actions.join(' ')}]",
+        "resources :#{plural_file_name}, only: %i[#{actions.join(' ')}]",
         namespace: regular_class_path
       )
     end

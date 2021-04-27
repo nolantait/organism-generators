@@ -1,10 +1,8 @@
-require 'rails_helper'
-
 describe <%= namespaced_model_class %>::Create do
   let(:result) { described_class.trace(params: params) }
   let(:params) do
     {
-      <%= singular_table_name %>: attributes_for(:<%= singular_table_name %>)
+      <%= singular_file_name %>: attributes_for(:<%= singular_file_name %>)
     }
   end
 

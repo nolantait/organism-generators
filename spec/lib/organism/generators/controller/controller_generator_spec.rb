@@ -1,13 +1,13 @@
 RSpec.describe Organism::ControllerGenerator, type: :generator do
+  destination Organism::Generators.tmp
+  arguments %w[other/some_thing new create edit update show index destroy]
+
+  before(:all) do
+    prepare_destination
+    run_generator
+  end
+
   context 'with a new module' do
-    destination Organism::Generators.tmp
-    arguments %w[other/some_things new create edit update show index destroy]
-
-    before(:all) do
-      prepare_destination
-      run_generator
-    end
-
     let(:file) { 'app/controllers/other/some_things_controller.rb' }
 
     context 'with all actions' do
@@ -56,7 +56,7 @@ RSpec.describe Organism::ControllerGenerator, type: :generator do
               def destroy
                 @some_thing.destroy
                 redirect_to(
-                  other_some_things_index_path,
+                  other_some_things_path,
                   notice: t('other.some_thing.destroy.success')
                 )
               end

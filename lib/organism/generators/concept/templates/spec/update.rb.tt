@@ -1,12 +1,10 @@
-require 'rails_helper'
-
 describe <%= namespaced_model_class %>::Update do
   let(:result) { described_class.trace(params: params) }
-  let(:model) { <%= model_class %>::Factory.call }
+  let(:model) { <%= namespaced_model_class %>::Factory.call }
   let(:params) do
     {
       id: model.id,
-      <%= singular_table_name %>: attributes_for(:<%= singular_table_name %>)
+      <%= singular_file_name %>: attributes_for(:<%= singular_file_name %>)
     }
   end
 

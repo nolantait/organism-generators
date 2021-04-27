@@ -75,9 +75,23 @@ RSpec.describe Organism::ConceptGenerator, type: :generator do
       let(:file) { 'spec/concepts/other/some_thing/create_spec.rb' }
 
       it 'creates a namespaced spec' do
-        class_header = /describe Other::SomeThing::Create/
+        expected_file = <<~FILE
+          describe Other::SomeThing::Create do
+            let(:result) { described_class.trace(params: params) }
+            let(:params) do
+              {
+                some_thing: attributes_for(:some_thing)
+              }
+            end
 
-        assert_file file, class_header
+            it 'persists when valid' do
+              expect(result.success?).to eq true
+              expect(result[:model].persisted?).to eq true
+            end
+          end
+        FILE
+
+        assert_file file, expected_file
       end
     end
 
@@ -85,9 +99,25 @@ RSpec.describe Organism::ConceptGenerator, type: :generator do
       let(:file) { 'spec/concepts/other/some_thing/update_spec.rb' }
 
       it 'creates a namespaced spec' do
-        class_header = /describe Other::SomeThing::Update/
+        expected_file = <<~FILE
+          describe Other::SomeThing::Update do
+            let(:result) { described_class.trace(params: params) }
+            let(:model) { Other::SomeThing::Factory.call }
+            let(:params) do
+              {
+                id: model.id,
+                some_thing: attributes_for(:some_thing)
+              }
+            end
 
-        assert_file file, class_header
+            it 'persists when valid' do
+              expect(result.success?).to eq true
+              expect(result[:model].updated_at).to be > result[:model].created_at
+            end
+          end
+        FILE
+
+        assert_file file, expected_file
       end
     end
   end

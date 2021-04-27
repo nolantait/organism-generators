@@ -6,7 +6,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 <% if index? -%>
 
   def index
-    @<%= file_name %> = <%= namespaced_model_class %>.all
+    @<%= plural_file_name %> = <%= namespaced_model_class %>.all
   end
 <% end -%>
 <% if show? -%>
@@ -25,7 +25,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     run <%= namespaced_model_class %>::Create do |result|
       return redirect_to(
         <%= after_create_path %>,
-        notice: t('<%= notice_namespace %>.create.success')
+        notice: t('<%= i18n_scope %>.create.success')
       )
     end
 
@@ -44,7 +44,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     run <%= namespaced_model_class %>::Update do |result|
       return redirect_to(
         <%= after_update_path %>,
-        notice: t('<%= notice_namespace %>.update.success')
+        notice: t('<%= i18n_scope %>.update.success')
       )
     end
 
@@ -57,7 +57,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= singular_file_name %>.destroy
     redirect_to(
       <%= after_destroy_path %>,
-      notice: t('<%= notice_namespace %>.destroy.success')
+      notice: t('<%= i18n_scope %>.destroy.success')
     )
   end
 <% end -%>

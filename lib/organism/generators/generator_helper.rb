@@ -3,11 +3,7 @@ module Organism
     private
 
     def controller_class_name
-      file_name.camelize
-    end
-
-    def notice_namespace
-      model_class_path.map(&:underscore).join('.')
+      file_name.pluralize.camelize
     end
 
     def nested_namespace(&block)

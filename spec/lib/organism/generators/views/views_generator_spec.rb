@@ -1,7 +1,7 @@
 RSpec.describe Organism::ViewsGenerator, type: :generator do
   context 'with a new module' do
     destination Organism::Generators.tmp
-    arguments %w[other/things new create edit update show index --collections list]
+    arguments %w[other/some_things new create edit update show index --collections list]
 
     before(:all) do
       prepare_destination
@@ -9,16 +9,16 @@ RSpec.describe Organism::ViewsGenerator, type: :generator do
     end
 
     context 'with new action' do
-      let(:file) { 'app/views/other/things/new.html.erb' }
+      let(:file) { 'app/views/other/some_things/new.html.erb' }
 
       it 'creates a view that calls a cell' do
         cell = <<~CELL
           <%= cell(
-            Other::Thing::Form,
+            Other::SomeThing::Form,
             @form,
             path: {
-              submit: other_things_path,
-              back: other_things_path
+              submit: other_some_things_path,
+              back: other_some_things_path
             }
           ).() %>
         CELL
@@ -28,16 +28,16 @@ RSpec.describe Organism::ViewsGenerator, type: :generator do
     end
 
     context 'with edit action' do
-      let(:file) { 'app/views/other/things/edit.html.erb' }
+      let(:file) { 'app/views/other/some_things/edit.html.erb' }
 
       it 'creates a view that calls a cell' do
         cell = <<~CELL
           <%= cell(
-            Other::Thing::Form,
+            Other::SomeThing::Form,
             @form,
             path: {
-              submit: other_thing_path(@model),
-              back: other_thing_path(@model)
+              submit: other_some_thing_path(@model),
+              back: other_some_thing_path(@model)
             }
           ).() %>
         CELL
@@ -47,13 +47,13 @@ RSpec.describe Organism::ViewsGenerator, type: :generator do
     end
 
     context 'with show action' do
-      let(:file) { 'app/views/other/things/show.html.erb' }
+      let(:file) { 'app/views/other/some_things/show.html.erb' }
 
       it 'creates a view that calls a cell' do
         cell = <<~CELL
           <%= cell(
-            Other::Thing::Show,
-            @other_thing,
+            Other::SomeThing::Show,
+            @other_some_thing,
           ).() %>
         CELL
 
@@ -62,13 +62,13 @@ RSpec.describe Organism::ViewsGenerator, type: :generator do
     end
 
     context 'with show action' do
-      let(:file) { 'app/views/other/things/show.html.erb' }
+      let(:file) { 'app/views/other/some_things/show.html.erb' }
 
       it 'creates a view that calls a cell' do
         cell = <<~CELL
           <%= cell(
-            Other::Thing::Show,
-            @other_thing,
+            Other::SomeThing::Show,
+            @other_some_thing,
           ).() %>
         CELL
 
@@ -77,13 +77,13 @@ RSpec.describe Organism::ViewsGenerator, type: :generator do
     end
 
     context 'with index action' do
-      let(:file) { 'app/views/other/things/index.html.erb' }
+      let(:file) { 'app/views/other/some_things/index.html.erb' }
 
       it 'creates a view that calls a cell' do
         cell = <<~CELL
           <%= cell(
-            Other::Thing::List,
-            @other_things,
+            Other::SomeThing::List,
+            @other_some_things,
           ).() %>
         CELL
 

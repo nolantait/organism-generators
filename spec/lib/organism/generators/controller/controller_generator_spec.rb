@@ -1,37 +1,37 @@
 RSpec.describe Organism::ControllerGenerator, type: :generator do
   context 'with a new module' do
     destination Organism::Generators.tmp
-    arguments %w[other/things new create edit update show index destroy]
+    arguments %w[other/some_things new create edit update show index destroy]
 
     before(:all) do
       prepare_destination
       run_generator
     end
 
-    let(:file) { 'app/controllers/other/things_controller.rb' }
+    let(:file) { 'app/controllers/other/some_things_controller.rb' }
 
     context 'with all actions' do
       it 'creates a view that calls a cell' do
         expected_file = <<~FILE
           module Other
-            class ThingsController < ApplicationController
-              before_action :set_thing, only: %i[destroy edit show update]
+            class SomeThingsController < ApplicationController
+              before_action :set_some_thing, only: %i[destroy edit show update]
 
               def index
-                @things = Other::Thing.all
+                @some_things = Other::SomeThing.all
               end
 
               def show; end
 
               def new
-                run Other::Thing::Present
+                run Other::SomeThing::Present
               end
 
               def create
-                run Other::Thing::Create do |result|
+                run Other::SomeThing::Create do |result|
                   return redirect_to(
-                    other_thing_path(result[:model]),
-                    notice: t('other.thing.create.success')
+                    other_some_thing_path(result[:model]),
+                    notice: t('other.some_thing.create.success')
                   )
                 end
 
@@ -39,14 +39,14 @@ RSpec.describe Organism::ControllerGenerator, type: :generator do
               end
 
               def edit
-                run Other::Thing::Present
+                run Other::SomeThing::Present
               end
 
               def update
-                run Other::Thing::Update do |result|
+                run Other::SomeThing::Update do |result|
                   return redirect_to(
-                    other_thing_path(result[:model]),
-                    notice: t('other.thing.update.success')
+                    other_some_thing_path(result[:model]),
+                    notice: t('other.some_thing.update.success')
                   )
                 end
 
@@ -54,17 +54,17 @@ RSpec.describe Organism::ControllerGenerator, type: :generator do
               end
 
               def destroy
-                @thing.destroy
+                @some_thing.destroy
                 redirect_to(
-                  other_things_index_path,
-                  notice: t('other.thing.destroy.success')
+                  other_some_things_index_path,
+                  notice: t('other.some_thing.destroy.success')
                 )
               end
 
               private
 
-              def set_thing
-                @thing = Other::Thing.find(params[:id])
+              def set_some_thing
+                @some_thing = Other::SomeThing.find(params[:id])
               end
             end
           end

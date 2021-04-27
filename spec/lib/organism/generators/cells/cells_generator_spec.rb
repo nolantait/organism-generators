@@ -1,7 +1,7 @@
 RSpec.describe Organism::CellsGenerator, type: :generator do
   context 'with a new module' do
     destination Organism::Generators.tmp
-    arguments %w[other/things new create edit update show index --collections list table]
+    arguments %w[other/some_things new create edit update show index --collections list table]
 
     before(:all) do
       prepare_destination
@@ -9,13 +9,13 @@ RSpec.describe Organism::CellsGenerator, type: :generator do
     end
 
     context 'with a new or edit action' do
-      let(:cell) { 'app/cells/other/thing/form.rb' }
-      let(:view) { 'app/cells/other/thing/form/show.erb' }
+      let(:cell) { 'app/cells/other/some_thing/form.rb' }
+      let(:view) { 'app/cells/other/some_thing/form/show.erb' }
 
       it 'creates a cell' do
         expected_cell = <<~CELL
           module Other
-            class Thing < ApplicationRecord
+            class SomeThing < ApplicationRecord
               class Form < ApplicationCell
                 include Forms
 
@@ -32,7 +32,7 @@ RSpec.describe Organism::CellsGenerator, type: :generator do
 
       it 'creates a form outline' do
         expected_view = <<~VIEW
-          <%= simple_form_for model, as: :other_thing, url: submit_url do |f| %>
+          <%= simple_form_for model, as: :some_thing, url: submit_url do |f| %>
             <fieldset>
               <%= legend %>
             </fieldset>
@@ -46,14 +46,14 @@ RSpec.describe Organism::CellsGenerator, type: :generator do
     end
 
     context 'with show action or list collection' do
-      let(:cell) { 'app/cells/other/thing/cell.rb' }
-      let(:show) { 'app/cells/other/thing/cell/show.erb' }
-      let(:list) { 'app/cells/other/thing/cell/list.erb' }
+      let(:cell) { 'app/cells/other/some_thing/cell.rb' }
+      let(:show) { 'app/cells/other/some_thing/cell/show.erb' }
+      let(:list) { 'app/cells/other/some_thing/cell/list.erb' }
 
       it 'creates a show cell' do
         expected_cell = <<~CELL
           module Other
-            class Thing < ApplicationRecord
+            class SomeThing < ApplicationRecord
               class Cell < ApplicationCell
                 def show
                   render
@@ -66,7 +66,7 @@ RSpec.describe Organism::CellsGenerator, type: :generator do
                 private
 
                 def component_style
-                  'other-thing'
+                  'other-some-thing'
                 end
               end
             end
@@ -96,17 +96,17 @@ RSpec.describe Organism::CellsGenerator, type: :generator do
     end
 
     context 'with a list collection' do
-      let(:cell) { 'app/cells/other/thing/list.rb' }
+      let(:cell) { 'app/cells/other/some_thing/list.rb' }
 
       it 'creates a list cell' do
         expected_cell = <<~CELL
           module Other
-            class Thing < ApplicationRecord
+            class SomeThing < ApplicationRecord
               class List < ApplicationCell
                 def show
                   cell(
                     Ui::List,
-                    other_things,
+                    other_some_things,
                     **list_options
                   ).()
                 end
@@ -122,14 +122,14 @@ RSpec.describe Organism::CellsGenerator, type: :generator do
                 end
 
                 def header
-                  content_tag(:h5, 'Things')
+                  content_tag(:h5, 'Some things')
                 end
 
                 def component_style
-                  'other-thing--list'
+                  'other-some-thing--list'
                 end
 
-                def other_things
+                def other_some_things
                   model
                 end
               end
@@ -142,17 +142,17 @@ RSpec.describe Organism::CellsGenerator, type: :generator do
     end
 
     context 'with a table collection' do
-      let(:cell) { 'app/cells/other/thing/table.rb' }
+      let(:cell) { 'app/cells/other/some_thing/table.rb' }
 
       it 'creates a table cell' do
         expected_cell = <<~CELL
           module Other
-            class Thing < ApplicationRecord
+            class SomeThing < ApplicationRecord
               class Table < ApplicationCell
                 def show
                   cell(
                     Ui::Table,
-                    other_things,
+                    other_some_things,
                     **table_options
                   ).()
                 end
@@ -168,14 +168,14 @@ RSpec.describe Organism::CellsGenerator, type: :generator do
                 end
 
                 def header
-                  content_tag(:h5, 'Things')
+                  content_tag(:h5, 'Some things')
                 end
 
                 def component_style
-                  'other-thing--table'
+                  'other-some-thing--table'
                 end
 
-                def other_things
+                def other_some_things
                   model
                 end
               end

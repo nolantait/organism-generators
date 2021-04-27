@@ -3,7 +3,7 @@ module Organism
     private
 
     def controller_class_name
-      human_name
+      file_name.camelize
     end
 
     def notice_namespace
@@ -58,7 +58,7 @@ module Organism
     end
 
     def model_class
-      options[:model].blank? ? human_name.singularize : options[:model]
+      options[:model].blank? ? file_name.singularize.camelize : options[:model]
     end
 
     def singular_actions

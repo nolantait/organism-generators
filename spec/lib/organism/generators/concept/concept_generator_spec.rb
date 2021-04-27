@@ -1,7 +1,7 @@
 RSpec.describe Organism::ConceptGenerator, type: :generator do
   context 'with a new module' do
     destination Organism::Generators.tmp
-    arguments %w[other/things new create]
+    arguments %w[other/some_things new create]
 
     before(:all) do
       prepare_destination
@@ -9,21 +9,21 @@ RSpec.describe Organism::ConceptGenerator, type: :generator do
     end
 
     context 'with present action' do
-      let(:file) { 'app/concepts/other/thing/present.rb' }
+      let(:file) { 'app/concepts/other/some_thing/present.rb' }
 
       it 'creates a namespaced action' do
         expected_file = <<~FILE
           module Other
-            class Thing < ApplicationRecord
+            class SomeThing < ApplicationRecord
               class Present < ApplicationOperation
-                step Model(Other::Thing, :find_by)
-                step Contract::Build(constant: Other::Thing::Contracts::Update),
+                step Model(Other::SomeThing, :find_by)
+                step Contract::Build(constant: Other::SomeThing::Contracts::Update),
                   Output(:success) => End(:success)
 
-                fail Model(Other::Thing, :new),
+                fail Model(Other::SomeThing, :new),
                   id: :build_new,
                   Output(:success) => Track(:success)
-                step Contract::Build(constant: Other::Thing::Contracts::Create),
+                step Contract::Build(constant: Other::SomeThing::Contracts::Create),
                   id: :build_new_contract
               end
             end
@@ -35,15 +35,15 @@ RSpec.describe Organism::ConceptGenerator, type: :generator do
     end
 
     context 'with create action' do
-      let(:file) { 'app/concepts/other/thing/create.rb' }
+      let(:file) { 'app/concepts/other/some_thing/create.rb' }
 
       it 'creates a namespaced action' do
         expected_file = <<~FILE
           module Other
-            class Thing < ApplicationRecord
+            class SomeThing < ApplicationRecord
               class Create < ApplicationOperation
-                step Subprocess(Other::Thing::Present)
-                step Contract::Validate(key: :thing)
+                step Subprocess(Other::SomeThing::Present)
+                step Contract::Validate(key: :some_thing)
                 step Contract::Persist()
               end
             end
@@ -55,12 +55,12 @@ RSpec.describe Organism::ConceptGenerator, type: :generator do
     end
 
     context 'with update action' do
-      let(:file) { 'app/concepts/other/thing/update.rb' }
+      let(:file) { 'app/concepts/other/some_thing/update.rb' }
 
       it 'creates a namespaced action' do
         expected_file = <<~FILE
           module Other
-            class Thing < ApplicationRecord
+            class SomeThing < ApplicationRecord
               class Update < Create
               end
             end
@@ -72,20 +72,20 @@ RSpec.describe Organism::ConceptGenerator, type: :generator do
     end
 
     context 'with a create spec' do
-      let(:file) { 'spec/concepts/other/thing/create_spec.rb' }
+      let(:file) { 'spec/concepts/other/some_thing/create_spec.rb' }
 
       it 'creates a namespaced spec' do
-        class_header = /describe Other::Thing::Create/
+        class_header = /describe Other::SomeThing::Create/
 
         assert_file file, class_header
       end
     end
 
     context 'with an update spec' do
-      let(:file) { 'spec/concepts/other/thing/update_spec.rb' }
+      let(:file) { 'spec/concepts/other/some_thing/update_spec.rb' }
 
       it 'creates a namespaced spec' do
-        class_header = /describe Other::Thing::Update/
+        class_header = /describe Other::SomeThing::Update/
 
         assert_file file, class_header
       end

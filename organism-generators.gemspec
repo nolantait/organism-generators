@@ -7,20 +7,18 @@ Gem::Specification.new do |spec|
   spec.email         = ['nolanjtait@gmail.com']
 
   spec.summary       = <<~SUMMARY
-    Generators for organism
+    Rails generators for quickly prototyping organisms.
   SUMMARY
   spec.description   = <<~DESCRIPTION
-    Generators for organism
+    Rails generators for quickly prototyping organisms.
   DESCRIPTION
   spec.homepage      = 'https://github.com/nolantait/organism-generators'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
 
-  spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/nolantait/organism-generators'
-  spec.metadata['changelog_uri'] = 'https://github.com/nolantait/organism-generators'
+  spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata['changelog_uri'] = spec.homepage
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -32,6 +30,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'byebug', '~> 11.1.3'
-  spec.add_development_dependency 'rspec', '~> 3.10.0'
   spec.add_development_dependency 'generator_spec', '~> 0.9.4'
+  spec.add_development_dependency 'rspec', '~> 3.10.0'
 end

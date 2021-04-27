@@ -12,7 +12,7 @@ module Organism
     # Your code goes here...
 
     def self.root
-      File.expand_path('../', __FILE__)
+      File.expand_path(__dir__)
     end
 
     def self.tmp

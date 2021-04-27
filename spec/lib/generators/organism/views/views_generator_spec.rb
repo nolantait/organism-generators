@@ -1,8 +1,6 @@
-require 'generator_spec'
-
-describe Organism::ViewsGenerator, type: :generator do
+RSpec.describe Organism::ViewsGenerator, type: :generator do
   context 'with a new module' do
-    destination Rails.root.join('tmp', 'generators')
+    destination Organism::Generators.tmp
     arguments %w[other/things new create edit update show index --collections list]
 
     before(:all) do

@@ -1,5 +1,3 @@
-require 'generator_spec'
-
 RSpec.describe Organism::ControllerGenerator, type: :generator do
   context 'with a new module' do
     destination Organism::Generators.tmp

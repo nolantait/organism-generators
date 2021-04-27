@@ -1,8 +1,6 @@
-require 'rails_helper'
-
-describe Organism::CellsGenerator, type: :generator do
+RSpec.describe Organism::CellsGenerator, type: :generator do
   context 'with a new module' do
-    destination Rails.root.join('tmp', 'generators')
+    destination Organism::Generators.tmp
     arguments %w[other/things new create edit update show index --collections list table]
 
     before(:all) do

@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'organism/generators'
+require 'generator_spec'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

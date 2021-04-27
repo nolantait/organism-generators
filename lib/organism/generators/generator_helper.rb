@@ -6,6 +6,10 @@ module Organism
       file_name.pluralize.camelize
     end
 
+    def contract_class(action)
+      model_class_path.concat(['contracts', action]).map(&:camelize).join('::')
+    end
+
     def nested_namespace(&block)
       content = capture(&block)
       content = nest_content(content)

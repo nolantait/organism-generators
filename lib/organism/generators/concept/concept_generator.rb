@@ -61,10 +61,6 @@ module Organism
       'ApplicationContract'
     end
 
-    def contract_class(action)
-      model_class_path.concat(['contracts', action]).map(&:camelize).join('::')
-    end
-
     def nested_namespace(&block)
       content = capture(&block)
       content = wrap_model(indent(content))

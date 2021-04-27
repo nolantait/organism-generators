@@ -9,6 +9,7 @@ module Organism
     def create_cells
       cells.each do |cell|
         create_cell(cell)
+        create_cell_spec(cell) if %w[cell form list table].include?(cell)
 
         next if cell == 'list'
         next if cell == 'table'
@@ -38,8 +39,22 @@ module Organism
       )
     end
 
+    def create_cell_spec(type)
+      template(
+        "#{type}/spec.rb",
+        File.join('spec/cells', singular_file_path, "#{type}_spec.rb")
+      )
+    end
+
     def singular_file_path
       model_class_path.join('/')
+    end
+
+    def cell_actions
+      [].tap do |array|
+        array << 'list' if list?
+        array << 'show' if show?
+      end
     end
 
     def cells

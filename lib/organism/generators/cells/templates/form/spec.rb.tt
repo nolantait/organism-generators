@@ -1,0 +1,21 @@
+describe <%= namespaced_model_class %>::Form, type: :cell do
+  controller ApplicationController
+  let(:result) { Capybara::Node::Simple.new(html) }
+  let(:model) do
+    <%= contract_class('create') %>.new(<%= namespaced_model_class %>.new)
+  end
+  let(:html) do
+    cell(
+      described_class,
+      model,
+      path: {
+        submit: '#',
+        back: '#'
+      }
+    ).()
+  end
+
+  it 'renders the form without error' do
+    expect(result).to have_xpath '//form'
+  end
+end

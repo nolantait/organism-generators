@@ -1,0 +1,17 @@
+describe <%= namespaced_model_class %>::Table, type: :cell do
+  controller ApplicationController
+  let(:result) { Capybara::Node::Simple.new(html) }
+  let(:items) do
+    [<%= namespaced_model_class %>.new(id: 1)]
+  end
+  let(:html) do
+    cell(
+      described_class,
+      model,
+    ).()
+  end
+
+  it 'renders the table without error' do
+    expect(result).to have_xpath '//table'
+  end
+end

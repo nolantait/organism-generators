@@ -2,7 +2,7 @@ require 'generator_spec'
 
 RSpec.describe Organism::ControllerGenerator, type: :generator do
   context 'with a new module' do
-    destination File.join(Organism::Generators.root, 'tmp', 'generators')
+    destination Organism::Generators.tmp
     arguments %w[other/things new create edit update show index destroy]
 
     before(:all) do

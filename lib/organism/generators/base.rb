@@ -5,7 +5,6 @@ module Organism
   module Generators
     class Base < Rails::Generators::NamedBase
       include Organism::GeneratorHelper
-      include Rails::Generators::ResourceHelpers
     end
   end
 end
